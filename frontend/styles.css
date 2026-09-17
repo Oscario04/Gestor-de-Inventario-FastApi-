@@ -73,12 +73,54 @@ button {
     background: #172033;
     color: white;
     font-weight: 700;
+    transition: background 0.2s, transform 0.1s;
+}
+
+button:hover:not(:disabled) {
+    background: #0f172a;
 }
 
 button:disabled { opacity: .55; cursor: not-allowed; }
-button.secondary { background: white; color: #172033; border: 1px solid #d4d9e1; }
-button.danger { background: #b42318; }
-button.small { padding: 7px 10px; font-size: 12px; }
+
+button.secondary { 
+    background: white; 
+    color: #172033; 
+    border: 1px solid #d4d9e1; 
+}
+button.secondary:hover:not(:disabled) {
+    background: #f1f5f9;
+}
+
+/* Botón de Editar (Azul) */
+button.edit {
+    background: #e0e7ff;
+    color: #3730a3;
+    border: 1px solid #c7d2fe;
+}
+button.edit:hover:not(:disabled) {
+    background: #c7d2fe;
+}
+
+/* Botón de Eliminar (Rojo) */
+button.danger { 
+    background: #b42318; 
+    color: white;
+}
+button.danger:hover:not(:disabled) {
+    background: #991b1b;
+}
+
+button.small { 
+    padding: 7px 12px; 
+    font-size: 12px; 
+}
+
+/* Contenedor para separar botones de acciones */
+.actions {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
 
 .message { min-height: 24px; }
 

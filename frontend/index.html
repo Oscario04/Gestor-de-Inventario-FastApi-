@@ -7,78 +7,126 @@
     <link rel="stylesheet" href="/styles.css">
 </head>
 <body>
-    <main class="container">
-        <header>
-            <div>
-                <p class="eyebrow">FASTAPI + MONGODB ATLAS</p>
-                <h1>Gestor de Inventario</h1>
-                <p>CRUD completo y procesamiento concurrente con <code>asyncio.to_thread()</code>.</p>
-            </div>
-            <button id="refreshBtn" class="secondary">Actualizar</button>
-        </header>
 
-        <section class="grid">
-            <article class="card">
-                <h2>Nuevo producto</h2>
-                <form id="productForm">
-                    <label>Nombre
-                        <input id="name" required minlength="2" maxlength="100">
-                    </label>
-                    <label>Categoría
-                        <input id="category" required minlength="2" maxlength="60">
-                    </label>
-                    <label>Precio
-                        <input id="price" type="number" min="0.01" step="0.01" required>
-                    </label>
-                    <label>Stock
-                        <input id="stock" type="number" min="0" step="1" required>
-                    </label>
-                    <label>Stock mínimo
-                        <input id="min_stock" type="number" min="0" step="1" value="5" required>
-                    </label>
-                    <button type="submit">Crear producto</button>
-                </form>
-                <p id="formMessage" class="message"></p>
-            </article>
+<main class="container">
 
-            <article class="card">
-                <h2>Prueba de concurrencia</h2>
-                <p>
-                    Ejecuta un cálculo CPU intensivo en un hilo secundario.
-                    Mientras corre, pulsa “Actualizar” para comprobar que la API sigue respondiendo.
-                </p>
-                <label>Iteraciones
-                    <input id="iterations" type="number" min="1000000" max="100000000" step="1000000" value="35000000">
+    <!-- =====================================
+         ENCABEZADO
+    ====================================== -->
+    <header>
+        <div>
+            <p class="eyebrow">FASTAPI + MONGODB ATLAS</p>
+            <h1>Gestor de Inventario</h1>
+            <p>
+                CRUD completo y procesamiento concurrente
+                con <code>asyncio.to_thread()</code>.
+            </p>
+        </div>
+        <button id="refreshBtn" class="secondary" type="button">
+            Actualizar
+        </button>
+    </header>
+
+    <!-- =====================================
+         SECCIÓN SUPERIOR
+    ====================================== -->
+    <section class="grid">
+
+        <!-- FORMULARIO PRODUCTO -->
+        <article class="card">
+            <h2 id="formTitle">Nuevo producto</h2>
+
+            <form id="productForm">
+                <label>
+                    Nombre
+                    <input id="name" type="text" required minlength="2" maxlength="100" placeholder="Nombre del producto">
                 </label>
-                <button id="reportBtn">Generar reporte pesado</button>
-                <pre id="reportResult">Sin ejecución.</pre>
-            </article>
-        </section>
 
-        <section class="card">
-            <div class="section-header">
-                <h2>Productos</h2>
-                <span id="count"></span>
-            </div>
-            <div class="table-wrapper">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Nombre</th>
-                            <th>Categoría</th>
-                            <th>Precio</th>
-                            <th>Stock</th>
-                            <th>Mínimo</th>
-                            <th>Estado</th>
-                            <th>Acciones</th>
-                        </tr>
-                    </thead>
-                    <tbody id="productsTable"></tbody>
-                </table>
-            </div>
-        </section>
-    </main>
+                <label>
+                    Categoría
+                    <input id="category" type="text" required minlength="2" maxlength="60" placeholder="Categoría">
+                </label>
 
-    <script src="/app.js"></script>
+                <label>
+                    Precio
+                    <input id="price" type="number" min="0.01" step="0.01" required placeholder="0.00">
+                </label>
+
+                <label>
+                    Stock
+                    <input id="stock" type="number" min="0" step="1" required placeholder="0">
+                </label>
+
+                <label>
+                    Stock mínimo
+                    <input id="min_stock" type="number" min="0" step="1" value="5" required>
+                </label>
+
+                <button id="submitProductBtn" type="submit">
+                    Crear producto
+                </button>
+
+                <button id="cancelEditBtn" class="secondary" type="button" style="display: none;">
+                    Cancelar edición
+                </button>
+            </form>
+
+            <p id="formMessage" class="message"></p>
+        </article>
+
+        <!-- PRUEBA DE CONCURRENCIA -->
+        <article class="card">
+            <h2>Prueba de concurrencia</h2>
+            <p>
+                Ejecuta un cálculo CPU intensivo en un hilo
+                secundario. Mientras corre, pulsa
+                “Actualizar” para comprobar que la API sigue
+                respondiendo.
+            </p>
+
+            <label>
+                Iteraciones
+                <input id="iterations" type="number" min="1000000" max="100000000" step="1000000" value="35000000">
+            </label>
+
+            <button id="reportBtn" type="button">
+                Generar reporte pesado
+            </button>
+
+            <pre id="reportResult">Sin ejecución.</pre>
+        </article>
+    </section>
+
+    <!-- =====================================
+         TABLA DE PRODUCTOS
+    ====================================== -->
+    <section class="card">
+        <div class="section-header">
+            <h2>Productos</h2>
+            <span id="count">0 producto(s)</span>
+        </div>
+
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Categoría</th>
+                        <th>Precio</th>
+                        <th>Stock</th>
+                        <th>Mínimo</th>
+                        <th>Estado</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody id="productsTable">
+                    <!-- Generado por app.js -->
+                </tbody>
+            </table>
+        </div>
+    </section>
+</main>
+
+<script src="/app.js"></script>
 </body>
 </html>
